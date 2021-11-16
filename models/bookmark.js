@@ -11,13 +11,42 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Bookmark.belongsTo(models.User)
     }
   };
   Bookmark.init({
-    title: DataTypes.STRING,
-    imageUrl: DataTypes.STRING,
-    description: DataTypes.STRING,
-    link: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
+    link: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
     UserId: DataTypes.INTEGER
   }, {
     sequelize,
