@@ -4,6 +4,14 @@ const { userAut } = require("../middleware/middleware");
 
 let router = express.Router();
 
+//create VA
+router.post("/createva", Controller.createVa);
+//Get Va
+router.post("/callback", Controller.callback);
+router.get("/getva", Controller.getVa);
+router.post("/payment", Controller.payment);
+router.get("/balance", Controller.getBalance);
+
 router.get("/currency", Controller.currencyApi);
 router.post("/register", Controller.register); //making
 router.post("/login", Controller.login); //making

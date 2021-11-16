@@ -3,12 +3,110 @@ const env = require("dotenv").config();
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { passHelper, jwtHelper } = require("../helper/helper");
-const { weather, currency } = require("../apis/weatherApi");
+const {
+  weather,
+  currency,
+  xenditBalance,
+  xenditCreateVa,
+  xenditPayment,
+  xenditGetVa,
+  xenditCallback,
+} = require("../apis/weatherApi");
 
 class Controller {
+  //CREATING VA
+  static async createVa(req, res, next) {
+    try {
+      let random = Math.floor(Math.random() * 9999999999999) + 1000000000000;
+      let obj = {
+        external_id: `va-${random}`, //13 angka
+        bank_code: "BNI",
+        name: "Fakhrul Arifin",
+        expected_amount: 50000000,
+        expiration_date: "2021-09-27T17:00:00.000Z",
+      };
+      // let balance = await xenditCreateVa(obj);
+      // {
+      //   is_closed: false,
+      //   status: 'PENDING',
+      //   currency: 'IDR',
+      //   owner_id: '6193c2549a388575bcaaf040',
+      //   external_id: 'va-1111111111111',
+      //   bank_code: 'BNI',
+      //   merchant_code: '8808',
+      //   name: 'XDT-Fakhrul Arifin',
+      //   account_number: '8808999926748515',
+      //   is_single_use: false,
+      //   expiration_date: '2052-11-15T17:00:00.000Z',
+      //   id: '6193e2d1f932ce57cb2851f5'
+      // } INI VA XENDIT KU
+      console.log(balance.data, "INI VA XENDIT KU");
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  //GET VA
+  static async getVa(req, res, next) {
+    try {
+      let obj = {
+        id: "6193e794f932ce8016285205",
+      };
+      let balance = await xenditGetVa(obj);
+      // {
+      //   is_closed: false,
+      //   status: 'ACTIVE',
+      //   currency: 'IDR',
+      //   owner_id: '6193c2549a388575bcaaf040',
+      //   external_id: 'va-1111111111111',
+      //   bank_code: 'BNI',
+      //   merchant_code: '8808',
+      //   name: 'XDT-Fakhrul Arifin',
+      //   account_number: '8808999926748515',
+      //   is_single_use: false,
+      //   expiration_date: '2052-11-15T17:00:00.000Z',
+      //   id: '6193e2d1f932ce57cb2851f5'
+      // } INI GET VA XENDIT KU
+      console.log(balance.data, "INI GET VA XENDIT KU");
+    } catch (err) {
+      next(err);
+    }
+  }
+  //PAYMENT VA
+  static async payment(req, res, next) {
+    try {
+      let obj = {
+        amount: 50000000,
+      };
+      let balance = await xenditPayment(obj);
+      console.log(balance.data, "INI PAYMENT XENDIT KU");
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  //CALLBACK VA
+  static async callback(req, res, next) {
+    try {
+      console.log("MASUKKK");
+      let balance = await xenditCallback();
+      console.log(balance, "INI CB XENDIT KU");
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getBalance(req, res, next) {
+    try {
+      let balance = await xenditBalance();
+      console.log(balance.data.balance, "INI SALDO XENDIT KU");
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async currencyApi(req, res, next) {
     try {
-      console.log("CURRECY");
       let getCurency = await currency();
       let curr = +getCurency.data.data.IDR.toString().split(".")[0];
       res.status(200).json(curr);
