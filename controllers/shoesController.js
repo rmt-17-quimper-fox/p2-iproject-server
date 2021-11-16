@@ -21,6 +21,11 @@ class ShoesController {
       next(err);
     }
   }
+
+  static async postShoes(req, res, next) {
+    try {
+    } catch (error) {}
+  }
 }
 
 module.exports = ShoesController;
