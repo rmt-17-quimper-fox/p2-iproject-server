@@ -24,7 +24,9 @@ class bookmarkController {
             const result = await Bookmark.findAll({
                 where:{UserId: req.user.id}
             })
+            res.status(200).json(result)
         } catch (err) {
+            console.log(err)
             next(err)
         }
     }
