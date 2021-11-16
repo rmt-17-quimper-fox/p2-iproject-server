@@ -9,6 +9,9 @@ const errorHandler = (err, req, res, next) => {
     case "UserNotFound":
       res.status(401).json({ message: "Invalid email/password" });
       break;
+    case "InvalidToken":
+      res.status(401).json({ message: "Authentication Error" });
+      break;
     case "JsonWebTokenError":
       res.status(403).json({ message: "You are not authorized" });
       break;
