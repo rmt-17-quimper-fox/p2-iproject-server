@@ -1,0 +1,25 @@
+edamame:
+link: https://api.edamam.com/api/food-database/v2/parser
+
+params:
+app_id : 37ac66e6
+app_key : 0d587550262b40af433c85fb1822c86e
+ingr: v
+health: v
+calories v
+category v
+
+
+link : https://api.edamam.com/api/recipes/v2
+
+params:
+app_id : 37ac66e6
+app_key : 0d587550262b40af433c85fb1822c86e
+q: v -
+diet: v -
+health v
+cuisineType v -
+mealType: v -
+dishType: v
+calories: v
+time: v
