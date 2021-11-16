@@ -8,8 +8,8 @@ const errorHandler = require('../middelwares/errorHandler');
 
 router.use('/', authRoutes);
 router.use('/shoes', shoesRoutes);
-router.use('/cart', cartRoutes);
-router.use('/brand', brandRoutes);
+router.use('/carts', cartRoutes);
+router.use('/brands', brandRoutes);
 
 router.use(errorHandler);
 
