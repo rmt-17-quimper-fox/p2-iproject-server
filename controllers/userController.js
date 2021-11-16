@@ -1,3 +1,5 @@
+const { comparePassword } = require('../helpers/bcrypt');
+const { genToken } = require('../helpers/jwt');
 const { User } = require('../models');
 
 class UserController {
@@ -19,6 +21,35 @@ class UserController {
       res.status(201).json({
         id: createdUser.id,
         email: createdUser.email,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async postLogin(req, res, next) {
+    try {
+      const { email, password } = req.body;
+
+      const foundUser = await User.findOne({
+        where: { email },
+      });
+
+      if (!foundUser) {
+        throw { name: 'invalid_user' };
+      }
+
+      if (!comparePassword(password, foundUser.password)) {
+        throw { name: 'invalid_user' };
+      }
+
+      const dataGenToken = {
+        id: foundUser.id,
+        email: foundUser.email,
+      };
+      const newToken = genToken(dataGenToken);
+      res.status(200).json({
+        access_token: newToken,
       });
     } catch (error) {
       next(error);
