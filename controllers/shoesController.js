@@ -37,6 +37,29 @@ class ShoesController {
       next(error);
     }
   }
+
+  static async getShoeById(req, res, next) {
+    try {
+      const shoeId = req.params.id;
+
+      const shoe = await Shoe.findByPk(shoeId, {
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: [
+          {
+            model: Brand,
+            attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+          },
+        ],
+      });
+
+      if (!shoe) {
+        throw { name: 'shoe_not_found' };
+      }
+      res.status(200).json(shoe);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = ShoesController;
