@@ -1,4 +1,5 @@
 'use strict';
+const { UserRefreshClient } = require('google-auth-library');
 const {
   Model
 } = require('sequelize');
@@ -10,15 +11,30 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Profile.belongsTo(models.User),
+      Profile.hasMany(models.ProfileGenre)
     }
   };
   Profile.init({
-    username: DataTypes.STRING,
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    shortBio: DataTypes.TEXT,
-    favoriteGenre: DataTypes.STRING
+    username: {
+      type: DataTypes.STRING,
+      validate:{
+        len: { args: { min: 5 }, msg: "Username length must be at least 5 characters." },
+      },
+      unique: {msg: "Username must be unique."}
+    },
+    firstName: {
+      type: DataTypes.STRING,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+    },
+    shortBio: {
+      type: DataTypes.TEXT,
+    },
+    favoriteGenre: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'Profile',
