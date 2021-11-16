@@ -2,118 +2,118 @@
   {
     "id": 1,
     "name": "Vans OldSkool black/white",
-    "price": "650000",
+    "price": 650000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/4/21/073e3fde-ca75-46d6-ad40-8b48eaf3bac4.jpg.webp",
     "stock": 10,
-    "brandId": 2,
-    "authorId": 1
+    "BrandId": 2,
+    "AuthorId": 1
   },
   {
     "id": 2,
     "name": "Vans Authentic black/white",
-    "price": "550000",
+    "price": 550000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2020/10/29/586e6864-e017-49e7-8b1a-078fa595be41.jpg",
     "stock": 10,
-    "brandId": 2,
-    "authorId": 1
+    "BrandId": 2,
+    "AuthorId": 1
   },
   {
     "id": 3,
     "name": "Vans sk8 high black/white",
-    "price": "750000",
+    "price": 750000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/2/22/b6a8896a-398c-4c6d-9814-a7a2a48fcd14.jpg.webp",
     "stock": 10,
-    "brandId": 2,
-    "authorId": 1
+    "BrandId": 2,
+    "AuthorId": 1
   },
   {
     "id": 4,
     "name": "Vans era black/white",
-    "price": "550000",
+    "price": 550000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/23/6dbf673c-3752-4561-9abc-92635a05c057.jpg.webp",
     "stock": 10,
-    "brandId": 2,
-    "authorId": 1
+    "BrandId": 2,
+    "AuthorId": 1
   },
   {
     "id": 5,
     "name": "Nike Air Force 1 White Black Gum Sole",
-    "price": "1500000",
+    "price": 1500000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2020/7/29/c2198cd8-0a5f-4637-8ae1-8374338a3ace.jpg",
     "stock": 10,
-    "brandId": 1,
-    "authorId": 1
+    "BrandId": 1,
+    "AuthorId": 1
   },
   {
     "id": 6,
     "name": "Nike Air Force 1 Emb Raider",
-    "price": "1500000",
+    "price": 1500000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/5/30/998ce1f1-b5af-4b46-b62f-6449ffbbae9a.jpg",
     "stock": 10,
-    "brandId": 1,
-    "authorId": 1
+    "BrandId": 1,
+    "AuthorId": 1
   },
   {
     "id": 7,
     "name": "Nike Air Jordan 1 Mid Dark Betroot Maroon Burgundy",
-    "price": "2500000",
+    "price": 2500000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2020/12/19/3449b1fb-9e0e-4059-8c75-1bd08c91119d.jpg",
     "stock": 10,
-    "brandId": 1,
-    "authorId": 1
+    "BrandId": 1,
+    "AuthorId": 1
   },
   {
     "id": 8,
     "name": "Nike Air Jordan 1 Mid 'Multi Colour'",
-    "price": "3000000",
+    "price": 3000000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/product-1/2020/3/7/667029298/667029298_a6f1db06-1131-40a5-b799-4a5e8b5f0fca_1080_1080.jpg",
     "stock": 10,
-    "brandId": 1,
-    "authorId": 1
+    "BrandId": 1,
+    "AuthorId": 1
   },
   {
     "id": 9,
     "name": "Converse 70s high Black/White",
-    "price": "750000",
+    "price": 750000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/8/3/f8f0a159-06a5-4c88-bca9-6093883a2cda.jpg",
     "stock": 10,
-    "brandId": 3,
-    "authorId": 1
+    "BrandId": 3,
+    "AuthorId": 1
   },
   {
     "id": 10,
     "name": "Converse Chuck Taylor 70s High Flame",
-    "price": "1250000",
+    "price": 1250000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/product-1/2020/3/7/667029298/667029298_a6f1db06-1131-40a5-b799-4a5e8b5f0fca_1080_1080.jpg",
     "stock": 10,
-    "brandId": 3,
-    "authorId": 1
+    "BrandId": 3,
+    "AuthorId": 1
   },
   {
     "id": 11,
     "name": "Converse Chuck Taylor All Star High Full White",
-    "price": "1250000",
+    "price": 1250000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/product-1/2020/1/19/297391/297391_a8ff6455-5987-4527-8467-2ff0de37d32c_520_520.jpg",
     "stock": 10,
-    "brandId": 3,
-    "authorId": 1
+    "BrandId": 3,
+    "AuthorId": 1
   },
   {
     "id": 11,
     "name": "Converse Chuck Taylor All Star High Full White",
-    "price": "1250000",
+    "price": 1250000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/product-1/2020/1/19/297391/297391_a8ff6455-5987-4527-8467-2ff0de37d32c_520_520.jpg",
     "stock": 10,
-    "brandId": 3,
-    "authorId": 1
+    "BrandId": 3,
+    "AuthorId": 1
   },
   {
     "id": 11,
     "name": "Dr.martens 1460 Nappa 8 eye",
-    "price": "2750000",
+    "price": 2750000,
     "imgUrl": "https://images.tokopedia.net/img/cache/500-square/product-1/2020/1/19/297391/297391_a8ff6455-5987-4527-8467-2ff0de37d32c_520_520.jpg",
     "stock": 10,
-    "brandId": 4,
-    "authorId": 1
+    "BrandId": 4,
+    "AuthorId": 1
   }
 ]
