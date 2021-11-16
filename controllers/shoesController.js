@@ -60,6 +60,23 @@ class ShoesController {
       next(error);
     }
   }
+
+  static async deleteShoeById(req, res, next) {
+    try {
+      const shoeId = req.params.id;
+      const shoe = await Shoe.findByPk(shoeId);
+
+      if (!shoe) {
+        throw { name: 'shoe_not_found' };
+      }
+
+      const result = await Shoe.destroy({ where: { id: shoeId } });
+
+      res.status(200).json({ message: `${shoe.name} Success to delete` });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = ShoesController;
