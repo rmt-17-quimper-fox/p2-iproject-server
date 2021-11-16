@@ -8,4 +8,4 @@ function verifyToken(access_token) {
   return jwt.verify(access_token, process.env.JWT_SIGNATURE);
 }
 
-module.exports = { createToken, verifyToken };
+module.exports = { signToken, verifyToken };
