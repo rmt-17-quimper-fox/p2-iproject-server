@@ -1,5 +1,28 @@
 const { Brand, User, Cart, Shoe } = require('../models');
+const shoe = require('../models/shoe');
 
-class CartController {}
+class CartController {
+  static async postCart(req, res, next) {
+    try {
+      const ShoeId = req.params.shoeId;
+      const AuthorId = req.user.id;
+
+      const shoe = await Shoe.findByPk(ShoeId);
+
+      if (!shoe) {
+        throw { name: 'shoe_not_found' };
+      }
+
+      const createCart = await Cart.create({
+        ShoeId,
+        AuthorId,
+      });
+
+      res.status(201).json(createCart);
+    } catch (error) {
+      next(error);
+    }
+  }
+}
 
 module.exports = CartController;
