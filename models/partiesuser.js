@@ -14,8 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   PartiesUser.init({
-    PartyId: DataTypes.INTEGER,
-    UserId: DataTypes.INTEGER
+    PartyId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true,
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true,
+      }
+    }
   }, {
     sequelize,
     modelName: 'PartiesUser',

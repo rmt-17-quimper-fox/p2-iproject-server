@@ -13,6 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       members_total: {
+        defaultValue: 1,
         allowNull: false,
         type: Sequelize.INTEGER
       },

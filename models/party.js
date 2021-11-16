@@ -14,10 +14,48 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Party.init({
-    name: DataTypes.STRING,
-    members_total: DataTypes.INTEGER,
-    mode: DataTypes.STRING,
-    schedule: DataTypes.DATE
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Name is required!"
+        },
+        notEmpty: {
+          msg: "Name is required!"
+        }
+      }
+    },
+    members_total: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false
+    },
+    mode: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Mode is required!"
+        },
+        notEmpty: {
+          msg: "Mode is required!"
+        }
+      }
+    },
+    schedule: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: {
+          msg: "Invalid date format!"
+        },
+        isAfter: {
+          args: new Date(),
+          msg: "Date must be today or after today!"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Party',

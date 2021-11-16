@@ -22,7 +22,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       rank: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
