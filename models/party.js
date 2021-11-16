@@ -4,13 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Party extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here
+      Party.belongsToMany(models.User, { through: models.PartiesUser, as: "members" })
     }
   };
   Party.init({
@@ -49,10 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isDate: {
           msg: "Invalid date format!"
-        },
-        isAfter: {
-          args: new Date(),
-          msg: "Date must be today or after today!"
         }
       }
     }
