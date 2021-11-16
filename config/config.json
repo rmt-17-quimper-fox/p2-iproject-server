@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "newsourceDB",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
