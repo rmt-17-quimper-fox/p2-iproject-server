@@ -1,17 +1,16 @@
 const router = require("express").Router();
 const errorHandler = require('../middlewares/errorHandler')
+const userController = require('../controllers/userController')
 
 router.get("/", (req, res) => {
   res.send("home");
 });
 
 
-router.post('/register', (req, res) => {
-    res.send("register");
-  });
-router.post('/login',(req, res) => {
-    res.send("login");
-  });
+router.post('/register', userController.register);
+router.post('/login', userController.login);
+
+router.post('/bookmarks/:id')
 
 router.use(errorHandler)
 

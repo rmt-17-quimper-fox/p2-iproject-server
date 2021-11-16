@@ -15,6 +15,12 @@ const errorHandler = (err, req, res, next) => {
     case "JsonWebTokenError":
       res.status(403).json({ message: "You are not authorized" });
       break;
+    case "BookmarkNotFound":
+      res.status(404).json({ message: "Bookmark not found" });
+      break;
+    case "NotAuthorized":
+      res.status(403).json({ message: "You are not authorized" });
+      break;
     default:
       res.status(500).json({ message: "Internal server error" });
       break;
