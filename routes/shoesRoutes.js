@@ -14,6 +14,7 @@ router.post(
   ShoesController.postShoes
 );
 router.get('/:id', ShoesController.getShoeById);
+router.patch('/:id', ShoesController.patchStock);
 router.delete('/:id', authorization, ShoesController.deleteShoeById);
 
 module.exports = router;

@@ -77,6 +77,24 @@ class ShoesController {
       next(error);
     }
   }
+
+  static async patchStock(req, res, next) {
+    try {
+      const stock = req.body.stock;
+      const shoeId = req.params.id;
+      const shoe = await Shoe.findByPk(shoeId);
+
+      if (!shoe) {
+        throw { name: 'shoe_not_found' };
+      }
+
+      const result = await Shoe.update({ stock }, { where: { id: shoeId } });
+
+      res.status(200).json('stock has been updated');
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = ShoesController;
