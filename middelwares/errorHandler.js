@@ -23,6 +23,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === 'InvalidFormatImg') {
     code = 415;
     msg = 'Invalid Format Image! Only JPG, JPEG and PNG format to upload';
+  } else if (err.name === 'shoe_not_found') {
+    code = 415;
+    msg = 'Shoes Not Found';
   }
 
   res.status(code).json({
