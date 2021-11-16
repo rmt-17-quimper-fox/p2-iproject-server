@@ -17,6 +17,12 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name === 'JsonWebTokenError' || err.name === 'invalid_token') {
     code = 401;
     msg = 'Invalid token';
+  } else if (err.name === 'BigSize') {
+    code = 413;
+    msg = 'Image Size is too Big, Image Size Max 255 KB';
+  } else if (err.name === 'InvalidFormatImg') {
+    code = 415;
+    msg = 'Invalid Format Image! Only JPG, JPEG and PNG format to upload';
   }
 
   res.status(code).json({
