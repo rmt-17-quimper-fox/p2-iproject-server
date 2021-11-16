@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "username": "abae",
+    "email": "abae@gmail.com",
+    "password": "abae123",
+    "role": "admin",
+    "address": "Jalan bligo no.9 Pondok Beringin Tambakaji",
+    "phoneNumber": "081273648317"
+  },
+  {
+    "id": 2,
+    "username": "akbar",
+    "email": "akbar@gmail.com",
+    "password": "akbar123",
+    "role": "customer",
+    "address": "Ngaliyan semarang",
+    "phoneNumber": "081273648317"
+  }
+]
