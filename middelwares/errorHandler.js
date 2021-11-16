@@ -24,8 +24,11 @@ const errorHandler = (err, req, res, next) => {
     code = 415;
     msg = 'Invalid Format Image! Only JPG, JPEG and PNG format to upload';
   } else if (err.name === 'shoe_not_found') {
-    code = 415;
+    code = 404;
     msg = 'Shoes Not Found';
+  } else if (err.name === 'Forbidden') {
+    code = 403;
+    msg = 'You are not allowed';
   }
 
   res.status(code).json({

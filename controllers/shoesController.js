@@ -60,6 +60,11 @@ class ShoesController {
       next(error);
     }
   }
+
+  static async deleteShoeById(req, res, next) {
+    try {
+    } catch (error) {}
+  }
 }
 
 module.exports = ShoesController;

@@ -7,5 +7,6 @@ const { multerImg } = require('../middelwares/multer');
 router.get('/', ShoesController.getShoes);
 router.post('/', multerImg, imageKitApi, ShoesController.postShoes);
 router.get('/:id', ShoesController.getShoeById);
+router.delete('/:id', ShoesController.deleteShoeById);
 
 module.exports = router;
