@@ -1,4 +1,4 @@
-const { imgApi } = require('../apis/ImageApiKit');
+const { imgApi } = require('../apis/imgKitApi');
 const FormData = require('form-data');
 
 const imageKitApi = async (req, res, next) => {

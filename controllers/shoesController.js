@@ -24,7 +24,18 @@ class ShoesController {
 
   static async postShoes(req, res, next) {
     try {
-    } catch (error) {}
+      const { name, price, imgUrl, stock, BrandId } = req.body;
+
+      const AuthorId = req.user.id;
+
+      const newShoe = { name, price, imgUrl, stock, BrandId, AuthorId };
+
+      const createShoe = await Shoe.create(newShoe);
+
+      res.status(201).json(createShoe);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
