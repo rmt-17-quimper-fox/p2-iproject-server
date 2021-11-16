@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const ShoesController = require('../controllers/shoesController');
+const { imageKitApi } = require('../middelwares/imgKit');
+const { multerImg } = require('../middelwares/multer');
 
 router.get('/', ShoesController.getShoes);
-router.post('/', ShoesController.postShoes);
+router.post('/', multerImg, imageKitApi, ShoesController.postShoes);
 
 module.exports = router;
