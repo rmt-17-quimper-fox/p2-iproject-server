@@ -90,7 +90,7 @@ class ShoesController {
 
       const result = await Shoe.update({ stock }, { where: { id: shoeId } });
 
-      res.status(200).json('stock has been updated');
+      res.status(200).json({ message: 'stock has been updated' });
     } catch (error) {
       next(error);
     }
