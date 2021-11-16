@@ -23,6 +23,29 @@ class CartController {
       next(error);
     }
   }
+
+  static async getCarts(req, res, next) {
+    try {
+      const AuthorId = req.user.id;
+      const carts = await Cart.findAll({
+        where: {
+          AuthorId,
+        },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt'],
+        },
+        include: {
+          model: Shoe,
+          attributes: {
+            exclude: ['createdAt', 'updatedAt'],
+          },
+        },
+      });
+      res.status(200).json(carts);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = CartController;
