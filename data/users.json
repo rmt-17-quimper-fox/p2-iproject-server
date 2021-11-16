@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Fakhrul",
+    "email": "f@gmail.com",
+    "password": "ffffff",
+    "role": "admin",
+    "AccountId": "1"
+  },
+  {
+    "name": "Fao",
+    "email": "fa@gmail.com",
+    "password": "ffffff",
+    "role": "admin",
+    "AccountId": "2"
+  },
+  {
+    "name": "Arif",
+    "email": "a@gmail.com",
+    "password": "aaaaaa",
+    "role": "customer",
+    "AccountId": "3"
+  },
+  {
+    "name": "Oktav",
+    "email": "o@gmail.com",
+    "password": "oooooo",
+    "role": "customer",
+    "AccountId": "4"
+  }
+]
