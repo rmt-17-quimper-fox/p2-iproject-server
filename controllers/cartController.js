@@ -46,6 +46,28 @@ class CartController {
       next(error);
     }
   }
+
+  static async deleteCart(req, res, next) {
+    try {
+      const ShoeId = req.params.shoeId;
+
+      const shoe = await Cart.findOne({
+        where: { ShoeId },
+      });
+
+      if (!shoe) {
+        throw { name: 'shoe_not_found' };
+      }
+
+      const cartDelete = await Cart.destroy({
+        where: { ShoeId },
+      });
+
+      res.status(200).json({ message: 'Delete Cart Success' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = CartController;
