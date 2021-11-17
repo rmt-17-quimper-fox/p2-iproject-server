@@ -9,13 +9,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       content: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       likes: {
         type: Sequelize.INTEGER
       },
       ReplyId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: `Tweets`,
+          key: `id`
+        }
       },
       createdAt: {
         allowNull: false,

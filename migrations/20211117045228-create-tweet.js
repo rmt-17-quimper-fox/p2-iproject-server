@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       content: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.TEXT
       },
       location: {
         type: Sequelize.STRING
@@ -24,7 +25,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       UserId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: `Users`,
+          key: `id`
+        }
       },
       createdAt: {
         allowNull: false,
