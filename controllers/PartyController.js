@@ -1,4 +1,4 @@
-const { Party, User, PartiesUser } = require("../models")
+const { Party, User, PartiesUser } = require("../models");
 
 class PartyController {
   static async fetchParties(req, res, next) {
@@ -7,31 +7,33 @@ class PartyController {
         include: {
           model: User,
           as: "members",
-          attributes: ["name", "rank"],
+          attributes: ["id", "name", "rank"],
         },
-      })
-      res.status(200).json(foundParties)
+      });
+      res.status(200).json(foundParties);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   static async createParty(req, res, next) {
     try {
-      const { name, mode, schedule } = req.body
+      const { name, mode, schedule } = req.body;
       const newParty = await Party.create({
         name,
         mode,
-        schedule
-      })
+        partyLeaderId: req.currentUser.id,
+        schedule,
+      });
       await PartiesUser.create({
         UserId: req.currentUser.id,
-        PartyId: newParty.id
-      })
-      res.status(201).json(newParty)
+        PartyId: newParty.id,
+        status: "approved",
+      });
+      res.status(201).json(newParty);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
 
-module.exports = PartyController
+module.exports = PartyController;

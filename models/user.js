@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.belongsToMany(models.Party, { through: models.PartiesUser, as: "parties" })
       User.hasMany(models.UsersHero)
-      User.hasMany(models.Party, { foreignKey: "partyLeaderId", as: "parties" })
+      User.hasMany(models.Party, { foreignKey: "partyLeaderId", as: "madeParies" })
     }
   };
   User.init({

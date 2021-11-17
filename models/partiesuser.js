@@ -27,6 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: true,
       }
+    },
+    status: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      defaultValue: "pending"
     }
   }, {
     sequelize,
