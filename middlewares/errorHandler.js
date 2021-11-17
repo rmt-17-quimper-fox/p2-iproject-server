@@ -26,6 +26,10 @@ const errorHandler = ({ name, errors }, req, res, next) => {
             status  = 400;
             message = name;
             break;
+        case 'Email not exist':
+            status = 400;
+            message = 'Email not exist';
+            break;
         case 'MulterError':
             status = 400;
             message = errors;
