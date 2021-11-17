@@ -11,12 +11,29 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Listing.belongsTo(models.Mountain, {foreignKey: "MountainId"})
+      Listing.belongsTo(models.User, {foreignKey:"UserId"})
     }
   };
   Listing.init({
-    UserId: DataTypes.INTEGER,
-    MountainId: DataTypes.INTEGER,
-    description: DataTypes.TEXT
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    MountainId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'Listing',
