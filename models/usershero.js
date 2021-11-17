@@ -14,8 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   UsersHero.init({
-    UserId: DataTypes.INTEGER,
-    HeroId: DataTypes.INTEGER
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    HeroId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'UsersHero',

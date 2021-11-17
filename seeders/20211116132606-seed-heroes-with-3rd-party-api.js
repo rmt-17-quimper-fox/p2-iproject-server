@@ -1,23 +1,37 @@
-'use strict';
-const axios = require('axios')
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const { data } = await axios({
-      url: 'https://api.opendota.com/api/heroes/',
-      method: 'get'
-    })
-    const seed = data.map(el => {
-      return { 
-        name: el.localized_name, 
+    await queryInterface.bulkInsert("Roles", [
+      {
+        title: "midlaner",
         createdAt: new Date(),
-        updatedAt: new Date() 
-      }
-    })
-    await queryInterface.bulkInsert('Heros', seed)
+        updatedAt: new Date(),
+      },
+      {
+        title: "carry",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: "offlaner",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: "support",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: "hardsupport",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Heros', null, {});
-  }
+    await queryInterface.bulkDelete("Roles", null, {});
+  },
 };

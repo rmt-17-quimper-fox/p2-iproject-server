@@ -21,12 +21,10 @@ module.exports = {
       HeroId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Heros',
-          key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -35,7 +33,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
