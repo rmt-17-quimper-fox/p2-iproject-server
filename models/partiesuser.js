@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      PartiesUser.belongsTo(models.User)
+      PartiesUser.belongsTo(models.Party)
     }
   };
   PartiesUser.init({

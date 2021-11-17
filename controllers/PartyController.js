@@ -11,8 +11,8 @@ class PartyController {
           include: {
             model: UsersHero,
             as: "heroes",
-            attributes: ['name']
-          }
+            attributes: ["name"],
+          },
         },
       });
       res.status(200).json(foundParties);
@@ -35,6 +35,40 @@ class PartyController {
         status: "approved",
       });
       res.status(201).json(newParty);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async createPartiesUser(req, res, next) {
+    try {
+      const PartyId = +req.params.id;
+      const UserId = req.currentUser.id;
+      const oldRequest = await PartiesUser.findOne({
+        where: {
+          PartyId,
+          UserId,
+        },
+      });
+      if (oldRequest) {
+        if (oldRequest.status === "approved") {
+          throw {
+            name: "duplicate",
+            message: "You are already a member of this party!",
+          };
+        }
+        if (oldRequest.status === "pending") {
+          throw {
+            name: "duplicate",
+            message:
+              "You already requested to join this party! Please wait for the Party Leader to proccess your request",
+          };
+        }
+      }
+      const newPartyMember = await PartiesUser.create({
+        PartyId,
+        UserId,
+      });
+      res.status(201).json(newPartyMember);
     } catch (error) {
       next(error);
     }
