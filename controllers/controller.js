@@ -3,6 +3,7 @@ const env = require("dotenv").config();
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { passHelper, jwtHelper } = require("../helper/helper");
+const nodemailer = require("nodemailer");
 const {
   weather,
   currency,
@@ -10,7 +11,7 @@ const {
   xenditCreateVa,
   xenditPayment,
   xenditGetVa,
-  xenditCallback,
+  covidData,
 } = require("../apis/weatherApi");
 
 class Controller {
@@ -104,6 +105,30 @@ class Controller {
           },
           { where: { external_id: req.query.external_id }, returning: true }
         );
+        //MULAI DARI SINI
+        console.log(response[1][0], "RESPON DATAAAA");
+        let mailTransporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "fakhrulhacktiv@gmail.com",
+            pass: "123456QWERTYasdfgh",
+          },
+        });
+
+        let mailDetails = {
+          from: "fakhrulhacktiv@gmail.com",
+          to: req.user.email,
+          subject: "Booking Paid via Fao Tour And Travel",
+          text: `Thank you for your payment, Booking ID ${response[1][0].id} has been paid with PaymentId: ${response[1][0].paymentId} `,
+        };
+
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
 
         res.status(200).json(response.data);
       }
@@ -117,13 +142,15 @@ class Controller {
     try {
       console.log(req.body);
       const { payment_id, external_id } = req.body;
-      console.log(payment_id, external_id, "di KONTROLLERRR");
-      await BookTrip.update(
-        {
-          paymentId: payment_id,
-        },
-        { where: { external_id: external_id }, returning: true }
-      );
+      if (payment_id) {
+        console.log(payment_id, external_id, "di KONTROLLERRR");
+        await BookTrip.update(
+          {
+            paymentId: payment_id,
+          },
+          { where: { external_id: external_id }, returning: true }
+        );
+      }
     } catch (err) {
       next(err);
     }
@@ -137,7 +164,7 @@ class Controller {
         amount: req.query.amount,
         external_id: req.query.external_id,
       };
-      console.log(obj, "DI PAYMENT");
+      console.log(obj, "DI CHECK PAYMENT");
       let checkPayment = await BookTrip.findAll({
         where: { external_id: obj.external_id },
       });
@@ -172,7 +199,7 @@ class Controller {
     try {
       //   console.log(req);
       const { name, email, password, alamat, telephone } = req.body;
-      console.log(name);
+      console.log(name, email, password, alamat, telephone);
       let obj = {
         name,
         alamat,
@@ -276,6 +303,14 @@ class Controller {
       let slice = +temp.toString().split(".")[0];
       response[0].temperature = slice;
 
+      console.log(response[0].destinationName.split(",")[1]);
+
+      const axiosCovid = await covidData(
+        response[0].destinationName.split(",")[1]
+      );
+      console.log(axiosCovid.data, "AXIOSS COVIDDDDD");
+      response[0].covidData = axiosCovid.data[0];
+
       res.status(200).json(response);
     } catch (err) {
       console.log(err);
@@ -285,12 +320,14 @@ class Controller {
 
   static async deleteCart(req, res, next) {
     try {
+      console.log(req.user.id, req.body.MovieId, "DISINIIIII");
       const response = await BookTrip.destroy({
         where: {
           UserId: req.user.id,
           TourPackageId: req.body.MovieId,
         },
       });
+      // console.log(response);
       if (!response) {
         throw { name: "notFound", message: "Not Found Item" };
       } else {

@@ -17,7 +17,7 @@ router.get("/getva/:id", userAut, Controller.getVa);
 router.post("/createva", userAut, Controller.createVa);
 //Get Va
 router.post("/callback", Controller.callback);
-router.post("/payment", Controller.payment);
+router.post("/payment", userAut, Controller.payment);
 router.post("/checkpayment", Controller.chechPayment);
 router.get("/balance", Controller.getBalance);
 

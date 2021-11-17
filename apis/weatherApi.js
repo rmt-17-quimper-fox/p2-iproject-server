@@ -6,6 +6,13 @@ const weatherAxios = axios.create({
 const currencyAxios = axios.create({
   baseURL: "https://freecurrencyapi.net/",
 });
+const covidAxios = axios.create({
+  baseURL: "https://covid-19-data.p.rapidapi.com/",
+  headers: {
+    "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
+    "x-rapidapi-key": "0ab433840emshfe226486d2580c1p1f7838jsn3704de90486a",
+  },
+});
 
 let privateKey = `xnd_development_mj2glQV8VKiEayUldu7pFQMHg8nGg2iyKzzSpoMWWR7AroHcrMeN1H067nKR8T:`;
 let buffedPrivateKey = Buffer.from(privateKey).toString("base64");
@@ -79,6 +86,13 @@ const currency = () => {
     url: `api/v2/latest?apikey=465f5650-46b2-11ec-86bf-cb243a2d8500`,
   });
 };
+const covidData = (payload) => {
+  return covidAxios({
+    method: "get",
+    url: `country/code`,
+    params: { code: `${payload}` },
+  });
+};
 
 module.exports = {
   weather,
@@ -88,4 +102,5 @@ module.exports = {
   xenditPayment,
   xenditGetVa,
   xenditCallback,
+  covidData,
 };

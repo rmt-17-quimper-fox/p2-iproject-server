@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.INTEGER,
       temperature: DataTypes.INTEGER,
       imgUrl: DataTypes.STRING,
+      covidData: DataTypes.JSON,
     },
     {
       sequelize,

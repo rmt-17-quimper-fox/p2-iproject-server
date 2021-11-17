@@ -5,3 +5,5 @@ let obj = {
 obj["umur"] = 3;
 
 console.log(obj);
+
+console.log("DIDSIDISDISIDDSIDISDD");
