@@ -11,13 +11,43 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsToMany(models.Mountain, {through: models.Listing, foreignKey:"UserId"})
     }
   };
   User.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg:"Username not empty" },
+        notNull: { msg:"Username not null" }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: { msg:"Wrong is Email" },
+        notEmpty: { msg:"Email not empty" },
+        notNull: { msg:"Email not null" }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg:"Password not empty" },
+        notNull: { msg: "Password not null" }
+      },
+      len: {
+        args: [5, 10],
+        msg: 'Password must between 5 and 10'
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'User',
