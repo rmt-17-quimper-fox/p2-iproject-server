@@ -5,7 +5,7 @@ const errorHandler = require('../middlewares/errorHandler')
 const router = express.Router()
 const routerTweet = require('./tweet');
 const routerRetweet = require('./retweets.js');
-const routerReplayTweet = require('./replayTweet.js');
+const routerReplayTweet = require('./replyTweet.js');
 
 
 router.post('/register',  Authentication.register)

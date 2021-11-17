@@ -9,31 +9,37 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       lastName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       username: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       email: {
+        unique: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
       password: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       profilePic: {
         type: Sequelize.STRING
       },
       retweet: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       following: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       followers: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

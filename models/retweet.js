@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Retweet.belongsTo(models.User, {
+        foreignKey: `UserId`
+      })
+      Retweet.belongsTo(models.Tweet, {
+        foreignKey: `TweetId`
+      })
     }
   };
   Retweet.init({
