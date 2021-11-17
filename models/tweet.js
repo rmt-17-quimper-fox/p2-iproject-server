@@ -25,13 +25,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: { msg: "Post is required" },
-        notNull: { msg: "Post is required" },
+        notEmpty: { msg: "Content is required" },
+        notNull: { msg: "Content is required" },
       },
     },
     location: DataTypes.STRING,
-    reply: DataTypes.INTEGER,
-    likes: DataTypes.INTEGER,
+    reply: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    retweet: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     UserId: DataTypes.INTEGER,
   }, {
     sequelize,

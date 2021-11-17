@@ -22,7 +22,7 @@ class RetweetController {
                     },
                 ],
                 where: {
-                    "userId": req.user.id
+                    "UserId": req.user.id
                 }
             })
             res.status(200).json(retweet)
@@ -36,11 +36,21 @@ class RetweetController {
     static async postRetweet (req, res, next) {
         try {
             const { id } = req.user
-            const { TweetId } = req.params
+            const { TweetId } = req.params.tweetId
+            console.log(id, TweetId);
             const retweet = await Retweet.create ({
-                userId: id,
-                TweetId
+                UserId: id,
+                TweetId,
+                include: [
+                    {
+                        model: Tweet,
+                        attributes: {
+                        exclude: ["createdAt", "updatedAt"],
+                        },
+                    },
+                ],
             })
+            console.log(retweet);
             res.status(200).json(retweet)
         } catch (err) {
             res.status(500).json(err)

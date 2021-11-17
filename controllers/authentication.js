@@ -3,6 +3,8 @@ const { hash, compare} = require('../helpers/bcrypt.js');
 const { sign } = require('../helpers/jwtToken.js');
 const { User } = require('../models');
 
+const nodemailer = require('nodemailer');
+
 class Authentication  {
 
     static async register (req, res, next) {
@@ -36,7 +38,7 @@ class Authentication  {
     static async login (req, res, next) {
         try {
             if (!req.body.email) {
-                
+                throw ({ name: `Error Login`})
             }
             console.log(req.body, "<<<<<<<<<<1111");
             let email = req.body.email
@@ -49,9 +51,33 @@ class Authentication  {
             if (userLogin) {
                 let isValidPassword = compare(password, userLogin.password)
                 if (isValidPassword) {
-                    let tokenPayload = { id: userLogin.id, email: userLogin.email, role: userLogin.role}
-                    let accessToken = sign(tokenPayload)
-                    res.status(200).json({ message: `Login Successful`, userId: userLogin.id, accessToken})
+                    let tokenPayload = { id: userLogin.id, email: userLogin.email}
+                    let access_token = sign(tokenPayload)
+                    // Nodemailer
+                    let mailTransporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: "lyusmurf13@gmail.com",
+                            pass: "ngawicity"
+                        }
+                    });
+                    console.log(mailTransporter);
+                    let mailDetails = {
+                        from: 'Tweettweet',
+                        to: userLogin.email,
+                        subject: 'Login Tweettweet',
+                        text: 'Login Successfully on Tweettweet'
+                    };
+
+                    mailTransporter.sendMail(mailDetails, function(err, data) {
+                        if(err) {
+                            console.log('Error Occurs');
+                        } else {
+                            console.log('Email sent successfully');
+                        }
+                    });
+                    res.status(200).json({ message: `Login Successful`, userId: userLogin.id, access_token})
+                
                 } else {
                     throw { name: "Error Login"}
                 }
@@ -64,6 +90,7 @@ class Authentication  {
     static async checkToken (req, res, next) {
         console.log(`asdsa`);
         try {
+            console.log(`asda`) 
             let { access_token } = req.headers;
             if (!access_token) {
     
