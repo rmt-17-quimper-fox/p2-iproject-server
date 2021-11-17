@@ -41,6 +41,7 @@ class userController {
       const token = createToken(payload);
       res.status(200).json({
         access_token: token,
+        email: user.email
       });
     } catch (err) {
       next(err);
@@ -81,6 +82,7 @@ class userController {
       const tokenMojo = createToken(payload);
       res.status(200).json({
         access_token: tokenMojo,
+        email: user.email
       });
     } catch (err) {
       console.log(err);
