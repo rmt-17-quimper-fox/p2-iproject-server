@@ -18,11 +18,11 @@ module.exports = {
       },
       ingredients: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       instructions: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       userId: {
         allowNull: false,
