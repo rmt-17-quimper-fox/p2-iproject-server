@@ -34,6 +34,7 @@ let userAut = async (req, res, next) => {
     }
     req.user = {
       id: response.id,
+      name: response.name,
       email: response.email,
       role: response.role,
     };

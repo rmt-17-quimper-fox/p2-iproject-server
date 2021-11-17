@@ -18,10 +18,10 @@ const xenditAxios = axios.create({
 });
 
 const callBack = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: " https://2f72-180-244-128-54.ngrok.io/",
   headers: {
     Authorization: "Basic " + buffedPrivateKey,
-    "x-callback-token": "H19aU9FoP9znVKj54fDk2ewYcdTwW1cawizBZutBHms7VNSh",
+    "x-callback-token": "4RRiQ3flS265ObF3C7ftH9FaVfZHAKktYxsjP8ixpBtTaVWq",
   },
 });
 // console.log(xenditAxios);
@@ -36,8 +36,10 @@ const xenditBalance = () => {
 const xenditPayment = (obj) => {
   return xenditAxios({
     method: "post",
-    url: `callback_virtual_accounts/external_id=va-1212121212121/simulate_payment`,
-    data: obj,
+    url: `callback_virtual_accounts/external_id=${obj.external_id}/simulate_payment`,
+    data: {
+      amount: obj.amount,
+    },
   });
 };
 
@@ -45,6 +47,7 @@ const xenditCallback = (obj) => {
   return callBack({
     method: "post",
     url: `virtual_account_paid_callback_url`,
+    data: obj,
   });
 };
 

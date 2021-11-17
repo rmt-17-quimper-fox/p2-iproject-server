@@ -18,14 +18,29 @@ class Controller {
   static async createVa(req, res, next) {
     try {
       let random = Math.floor(Math.random() * 9999999999999) + 1000000000000;
+      const date = new Date(Date.now() + 3600 * 1000 * 24);
+      // console.log(req);
+
       let obj = {
         external_id: `va-${random}`, //13 angka
         bank_code: "BNI",
-        name: "Fakhrul Arifin",
-        expected_amount: 50000000,
-        expiration_date: "2021-09-27T17:00:00.000Z",
+        name: `${req.user.name}`,
+        expected_amount: `${req.body.amount}`,
+        expiration_date: date,
       };
-      // let balance = await xenditCreateVa(obj);
+      let balance = await xenditCreateVa(obj);
+      console.log(req.body.bookid);
+      console.log(balance.data.status);
+
+      let response = await BookTrip.update(
+        {
+          status: balance.data.status,
+          external_id: balance.data.external_id,
+          idXendit: balance.data.id,
+        },
+        { where: { id: req.body.bookid }, returning: true }
+      );
+      res.status(200).json(response);
       // {
       //   is_closed: false,
       //   status: 'PENDING',
@@ -40,7 +55,7 @@ class Controller {
       //   expiration_date: '2052-11-15T17:00:00.000Z',
       //   id: '6193e2d1f932ce57cb2851f5'
       // } INI VA XENDIT KU
-      console.log(balance.data, "INI VA XENDIT KU");
+      // console.log(balance.data, "INI VA XENDIT KU");
     } catch (err) {
       next(err);
     }
@@ -50,9 +65,10 @@ class Controller {
   static async getVa(req, res, next) {
     try {
       let obj = {
-        id: "6193e794f932ce8016285205",
+        id: req.params.id,
       };
-      let balance = await xenditGetVa(obj);
+      let response = await xenditGetVa(obj);
+      res.status(200).json(response.data);
       // {
       //   is_closed: false,
       //   status: 'ACTIVE',
@@ -67,7 +83,7 @@ class Controller {
       //   expiration_date: '2052-11-15T17:00:00.000Z',
       //   id: '6193e2d1f932ce57cb2851f5'
       // } INI GET VA XENDIT KU
-      console.log(balance.data, "INI GET VA XENDIT KU");
+      // console.log(balance.data, "INI GET VA XENDIT KU");
     } catch (err) {
       next(err);
     }
@@ -75,11 +91,32 @@ class Controller {
   //PAYMENT VA
   static async payment(req, res, next) {
     try {
+      // console.log(req, "DI PAYMENT");
       let obj = {
-        amount: 50000000,
+        amount: req.query.amount,
+        external_id: req.query.external_id,
       };
       let balance = await xenditPayment(obj);
-      console.log(balance.data, "INI PAYMENT XENDIT KU");
+      if (balance.data.status === "COMPLETED") {
+        let response = await BookTrip.update(
+          {
+            status: balance.data.status,
+          },
+          { where: { external_id: req.query.external_id }, returning: true }
+        );
+        console.log(balance, "INI DATA PAYMENT");
+
+        let cb = {
+          created: new Date().toUTCString(),
+          updated: new Date().toUTCString(),
+          owner_id: "6193c2549a388575bcaaf040",
+        };
+        console.log(cb, "INI CB DARI SINI");
+
+        let balance1 = await xenditCallback();
+        console.log(balance1, "INI BALANCE DATA");
+        res.status(200).json(response.data);
+      }
     } catch (err) {
       next(err);
     }
