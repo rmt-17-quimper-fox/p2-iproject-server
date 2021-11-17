@@ -10,16 +10,29 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Tweet.belongsTo(models.User, { 
+        foreignKey: `UserId`})
+      Tweet.belongsToMany(models.User, {
+        through: models.Retweet
+      })
+      Tweet.hasMany(models.ReplyTweet, {
+        foreignKey: `ReplayId`
+      })
     }
   };
   Tweet.init({
-    content: DataTypes.STRING,
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "Post is required" },
+        notNull: { msg: "Post is required" },
+      },
+    },
     location: DataTypes.STRING,
     reply: DataTypes.INTEGER,
-    retweet: DataTypes.INTEGER,
     likes: DataTypes.INTEGER,
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Tweet',
