@@ -14,9 +14,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Comment.init({
-    comments: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
-    recipeId: DataTypes.INTEGER
+    comments: {
+      type: DataTypes.TEXT,
+    },
+    userId: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate : {
+        notNull: {
+          msg: "UserId is required"
+        },
+        notEmpty: {
+          msg: "UserId is required"
+        }
+      }
+    },
+    recipeId: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate : {
+        notNull: {
+          msg: "RecipeId is required"
+        },
+        notEmpty: {
+          msg: "RecipeId is required"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Comment',
