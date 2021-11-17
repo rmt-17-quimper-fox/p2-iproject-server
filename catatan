@@ -23,3 +23,23 @@ mealType: v -
 dishType: v
 calories: v
 time: v
+
+Users:
+username
+email
+password
+token
+star
+
+Recipes:
+title
+imageUrl
+ingredients
+instructions
+userId
+
+Comments
+id
+comment
+userId
+recipeId
