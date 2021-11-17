@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/akhernadi/p2-iproject-server#readme",
   "dependencies": {
+    "@paypal/paypal-js": "^4.1.0",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",

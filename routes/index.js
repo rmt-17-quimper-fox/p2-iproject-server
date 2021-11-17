@@ -8,12 +8,12 @@ const errorHandler = require('../middelwares/errorHandler');
 const authentication = require('../middelwares/authentication');
 
 router.use('/', authRoutes);
+router.use('/shoes', shoesRoutes);
+router.use('/brands', brandRoutes);
 
 router.use(authentication);
 
-router.use('/shoes', shoesRoutes);
 router.use('/carts', cartRoutes);
-router.use('/brands', brandRoutes);
 
 router.use(errorHandler);
 

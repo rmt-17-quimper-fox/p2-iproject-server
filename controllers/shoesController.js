@@ -1,9 +1,12 @@
 const { Brand, User, Cart, Shoe } = require('../models');
+const { Op } = require('sequelize');
 
 class ShoesController {
   static async getShoes(req, res, next) {
     try {
-      const shoes = await Shoe.findAll({
+      const { name } = req.query;
+      const obj = {
+        where: {},
         attributes: { exclude: ['createdAt', 'updatedAt'] },
         include: [
           {
@@ -15,10 +18,16 @@ class ShoesController {
             attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
           },
         ],
-      });
+      };
+
+      if (name) {
+        obj.where.name = { [Op.like]: `%${name}%` };
+      }
+
+      const shoes = await Shoe.findAll(obj);
       res.status(200).json(shoes);
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   }
 
