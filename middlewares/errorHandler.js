@@ -30,6 +30,10 @@ const errorHandler = ({ name, errors }, req, res, next) => {
             status = 400;
             message = 'Email not exist';
             break;
+        case 'Invalid Token':
+            status = 400;
+            message = 'Invalid Token';
+            break;
         case 'MulterError':
             status = 400;
             message = errors;

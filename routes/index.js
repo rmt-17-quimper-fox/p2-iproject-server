@@ -79,18 +79,27 @@ router.patch('/forgotpassword', async (req, res, next) => {
         const token = getJwtToken(payload);
         userFound.token = token;
         userFound.save();
-
         const subject = 'Reset Password';
         const text = `This is your reset token ${token}`;
         sendEmail(email, subject, text);
-
         res.status(200).json({ message: 'Please check your email to get reset token' });
     } catch (error) {
         next(error)
     }
 })
 router.patch('/resetpassword', async (req, res, next) => {
-    res.send('Hello World!')
+    try {
+        const { token, password } = req.body;
+        const userFound = await User.findOne({ where: { token } });
+        if(!userFound) {
+            throw { name: 'Invalid Token' };
+        }
+        userFound.password = hashPassword(password);
+        userFound.save();
+        res.status(200).json({ message: 'Password is already been updated' });
+    } catch (error) {
+        next(error);
+    }
 })
 
 // router.use()
