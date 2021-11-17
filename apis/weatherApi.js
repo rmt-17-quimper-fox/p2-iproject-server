@@ -18,10 +18,10 @@ const xenditAxios = axios.create({
 });
 
 const callBack = axios.create({
-  baseURL: " https://2f72-180-244-128-54.ngrok.io/",
+  baseURL: "https://dc28-180-244-128-54.ngrok.io/",
   headers: {
     Authorization: "Basic " + buffedPrivateKey,
-    "x-callback-token": "4RRiQ3flS265ObF3C7ftH9FaVfZHAKktYxsjP8ixpBtTaVWq",
+    "x-callback-token": "H19aU9FoP9znVKj54fDk2ewYcdTwW1cawizBZutBHms7VNSh",
   },
 });
 // console.log(xenditAxios);

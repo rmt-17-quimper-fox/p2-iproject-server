@@ -104,17 +104,7 @@ class Controller {
           },
           { where: { external_id: req.query.external_id }, returning: true }
         );
-        console.log(balance, "INI DATA PAYMENT");
 
-        let cb = {
-          created: new Date().toUTCString(),
-          updated: new Date().toUTCString(),
-          owner_id: "6193c2549a388575bcaaf040",
-        };
-        console.log(cb, "INI CB DARI SINI");
-
-        let balance1 = await xenditCallback();
-        console.log(balance1, "INI BALANCE DATA");
         res.status(200).json(response.data);
       }
     } catch (err) {
@@ -125,9 +115,34 @@ class Controller {
   //CALLBACK VA
   static async callback(req, res, next) {
     try {
-      console.log("MASUKKK");
-      let balance = await xenditCallback();
-      console.log(balance, "INI CB XENDIT KU");
+      console.log(req.body);
+      const { payment_id, external_id } = req.body;
+      console.log(payment_id, external_id, "di KONTROLLERRR");
+      await BookTrip.update(
+        {
+          paymentId: payment_id,
+        },
+        { where: { external_id: external_id }, returning: true }
+      );
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  //CHECK PAYID
+  static async chechPayment(req, res, next) {
+    try {
+      // console.log(req, "DI PAYMENT");
+      let obj = {
+        amount: req.query.amount,
+        external_id: req.query.external_id,
+      };
+      console.log(obj, "DI PAYMENT");
+      let checkPayment = await BookTrip.findAll({
+        where: { external_id: obj.external_id },
+      });
+
+      res.status(200).json(checkPayment[0].paymentId);
     } catch (err) {
       next(err);
     }

@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       status: DataTypes.STRING,
       external_id: DataTypes.STRING,
       idXendit: DataTypes.STRING,
+      paymentId: DataTypes.STRING,
     },
     {
       sequelize,
