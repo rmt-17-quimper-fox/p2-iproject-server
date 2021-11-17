@@ -2,9 +2,9 @@ const { User } = require('../models');
 const { getPayload } = require('../helpers/auth');
 const authentication = async (req, res, next) => {
     try {
-        const { path } = req.route;
+        const originalUrl = req.originalUrl;
         const { access_token } = req.headers;
-        if(path === '/edamame' && !access_token) {
+        if(originalUrl === '/edamame' && !access_token) {
             next();
         }
         if(!access_token) {
@@ -15,11 +15,6 @@ const authentication = async (req, res, next) => {
         if(!foundUser) {
             throw { name: 'Unauthorized' };
         }
-        if(baseUrl === '/customers') {
-            if(foundUser.role !== 'Customer') {
-                throw { name: 'Forbidden' };
-            }
-        }
         req.user = {
             id: foundUser.id,
             email: foundUser.email,
@@ -27,6 +22,7 @@ const authentication = async (req, res, next) => {
         }
         next();
     } catch (error) {
+        console.log(error);
         next(error);
     }
 }

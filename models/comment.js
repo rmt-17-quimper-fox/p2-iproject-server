@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Comment.belongsTo(models.User, { foreignKey: 'userId' });
     }
   };
   Comment.init({
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       validate : {
         notNull: {
           msg: "UserId is required"
@@ -31,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     recipeId: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       validate : {
         notNull: {
           msg: "RecipeId is required"
