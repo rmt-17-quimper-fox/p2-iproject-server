@@ -56,6 +56,14 @@ class UserController {
       next(error);
     }
   }
+
+  static async postLoginFirebase(req, res, next) {
+    try {
+      console.log(req);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;
