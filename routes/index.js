@@ -5,6 +5,7 @@ const thirdPartyRouter = require('./ThirdPartyRouter');
 const recipeRouter = require('./RecipeRouter');
 const commentRouter = require('./CommentRouter');
 const { getJwtToken, getPayload } = require('../helpers/auth');
+const { hashPassword, comparePassword } = require('../helpers/bcrypt');
 const errorHandler = require('../middlewares/errorHandler');
 const { User } = require('../models');
 
@@ -34,7 +35,34 @@ router.post('/register', async (req, res, next) => {
     }
 })
 router.post('/login', async (req, res, next) => {
-    res.send('Hello World!')
+    try {
+        const { email, password } = req.body;
+        if(!email) {
+            throw { name: 'Email is empty' }
+        }
+        if(!password) {
+            throw { name: 'Password is empty' }
+        }
+        const resp = await User.findOne({
+            where: { email }
+        });
+        if(!resp) {
+            throw { name: 'Invalid email/password' };
+        };
+        const hashedPassword = resp.password;
+        const isPasswordCorrect = comparePassword(password, hashedPassword);
+        if(!isPasswordCorrect) {
+            throw { name: 'Invalid email/password' };
+        }
+        const payload = {
+            id: resp.id,
+            email: resp.email
+        };
+        const token = getJwtToken(payload);
+        res.status(200).json({ access_token: token });
+    } catch (error) {
+        next(error); 
+    }
 })
 router.patch('/forgetpasswords', async (req, res, next) => {
     res.send('Hello World!')

@@ -14,6 +14,14 @@ const errorHandler = ({ name, errors }, req, res, next) => {
             status = 400;
             message = errors;
             break;
+        case 'Email is empty':
+            status = 400;
+            message = 'Email is required';
+            break;
+        case 'Password is empty':
+            status = 400;
+            message = 'Password is required';
+            break;
         case 'Invalid email/password':
             status  = 400;
             message = name;
