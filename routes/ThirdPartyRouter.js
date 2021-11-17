@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const recipe = require('../models/recipe');
+const paginateData = require('../helpers/pagination');
 const edamameAPI = 'https://api.edamam.com/api/recipes/v2';
 const youtubeAPI = 'https://www.googleapis.com/youtube/v3/search';
 
 router.get('/edamame', async (req, res, next) => {
     try {
-        const { searchText, dietType, mealType, cuisineType } = req.body; 
+        let { searchText, dietType, mealType, cuisineType, size, currentPage } = req.body;
+        if(!searchText) {
+            searchText = 'foods';
+        }
         const params = {
             type: 'public',
             app_id: process.env.EDAMAME_API_ID,
@@ -41,6 +44,13 @@ router.get('/edamame', async (req, res, next) => {
         resp.forEach(el => {
             el.id = el.id.split('#')[1]
         });
+        if(!size) {
+            size = resp.length;
+            currentPage = 1;
+        };
+        size = +size;
+        currentPage = +currentPage;
+        resp = paginateData(resp, size, currentPage);
         res.status(200).json(resp);
     } catch (error) {
         console.log(error);
