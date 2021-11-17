@@ -4,9 +4,10 @@ const userRouter = require('./UserRouter');
 const thirdPartyRouter = require('./ThirdPartyRouter'); 
 const recipeRouter = require('./RecipeRouter');
 const commentRouter = require('./CommentRouter');
-const { getJwtToken, getPayload } = require('../helpers/auth');
+const { getJwtToken } = require('../helpers/auth');
 const { hashPassword, comparePassword } = require('../helpers/bcrypt');
 const sendEmail = require('../helpers/nodemailer');
+const authentication = require('../middlewares/auth');
 const errorHandler = require('../middlewares/errorHandler');
 const { User } = require('../models');
 
@@ -101,10 +102,9 @@ router.patch('/resetpassword', async (req, res, next) => {
         next(error);
     }
 })
-
-// router.use()
-router.use(thirdPartyRouter)
-router.use(userRouter)
+router.use(authentication);
+router.use(thirdPartyRouter);
+router.use(userRouter);
 router.use(recipeRouter)
 router.use(commentRouter)
 router.use(errorHandler);

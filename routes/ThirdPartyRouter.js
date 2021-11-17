@@ -44,6 +44,11 @@ router.get('/edamame', async (req, res, next) => {
         resp.forEach(el => {
             el.id = el.id.split('#')[1]
         });
+        if(!req.headers.access_token) {
+            resp = resp.slice(0, 3);
+            size = resp.length;
+            currentPage = 1;
+        }
         if(!size) {
             size = resp.length;
             currentPage = 1;
