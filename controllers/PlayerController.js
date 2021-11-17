@@ -22,6 +22,19 @@ class PlayerController{
       next(error)
     }
   }
+  static async updateRank(req, res, next) {
+    try {
+      const { rank } = req.body
+      await User.update({ rank }, {
+        where: {
+          id: req.currentUser.id
+        }
+      })
+      res.status(200).json({ message: "Your Rank has been updated!" })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = PlayerController
