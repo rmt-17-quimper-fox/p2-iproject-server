@@ -57,16 +57,9 @@ class userController {
     const jwtToken = req.body.access_token;
 
     try {
-      await ma.mojoAPI
-        .verifyToken(jwtToken)
-        .then(function (response) {
-          emailMojo = response.identifier;
-          console.log(emailMojo, "di promise");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      console.log(emailMojo, "ini email mojo");
+      const response = await ma.mojoAPI.verifyToken(jwtToken)
+      console.log(response, "ini email mojo");
+      emailMojo = response.identifier
       const [user, created] = await User.findOrCreate({
         where: {
           email: emailMojo,
