@@ -12,10 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
 
-app.get("/", (req, res) => {
-  res.send("Welcome To Binge Buddy!");
-});
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
