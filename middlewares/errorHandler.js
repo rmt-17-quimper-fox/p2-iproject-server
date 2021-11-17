@@ -19,6 +19,9 @@ function errorHandler(error, req, res, next) {
       message = "Invalid token!"
       status = 401
       break
+    case "duplicate":
+      message = error.message
+      status = 400  
   }
   res.status(status).json({ message })
 }

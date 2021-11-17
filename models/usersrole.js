@@ -5,7 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class UsersRole extends Model {
     static associate(models) {
-      // define association here
+      UsersRole.belongsTo(models.User)
+      UsersRole.belongsTo(models.Role)
     }
   };
   UsersRole.init({

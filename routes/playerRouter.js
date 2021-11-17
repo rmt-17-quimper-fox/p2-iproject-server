@@ -1,6 +1,7 @@
 const express = require('express')
 const playerRouter = express()
+const PlayerController = require("../controllers/PlayerController")
 
-playerRouter.get("/", (req, res) => { console.log('tes'); })
+playerRouter.post("/", PlayerController.addRole)
 
 module.exports = playerRouter

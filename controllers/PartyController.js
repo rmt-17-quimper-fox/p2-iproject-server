@@ -1,4 +1,4 @@
-const { Party, User, PartiesUser } = require("../models");
+const { Party, User, PartiesUser, UsersHero } = require("../models");
 
 class PartyController {
   static async fetchParties(req, res, next) {
@@ -8,6 +8,11 @@ class PartyController {
           model: User,
           as: "members",
           attributes: ["id", "name", "rank"],
+          include: {
+            model: UsersHero,
+            as: "heroes",
+            attributes: ['name']
+          }
         },
       });
       res.status(200).json(foundParties);

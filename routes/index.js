@@ -10,7 +10,7 @@ router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 
 router.use("/party", authentication, partyRouter);
-router.use("/player", playerRouter);
+router.use("/player",authentication, playerRouter);
 
 router.use(errorHandler);
 
