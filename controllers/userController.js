@@ -50,6 +50,7 @@ class UserController {
       const newToken = genToken(dataGenToken);
       res.status(200).json({
         access_token: newToken,
+        id: foundUser.id,
       });
     } catch (error) {
       next(error);
