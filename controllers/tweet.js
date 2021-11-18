@@ -40,7 +40,7 @@ class TweetController {
             console.log(`1234544`);
             const result = await Tweet.findAll({attributes: {
                 exclude: ["createdAt"],
-                
+                order: ["id", "ASC"]
             },
             order: [["updatedAt", "DESC"]],
             include: [
