@@ -49,9 +49,10 @@ class userController {
   }
 
   static async mojologin(req, res, next) {
+    let key = process.env.MOJO_API_KEY
     let emailMojo = "";
     const config = {
-      apiKey: "3129be04-cebd-4e8a-9114-6bd198dfef04",
+      apiKey: key,
     };
     const ma = require("mojoauth-sdk")(config);
     const jwtToken = req.body.access_token;
