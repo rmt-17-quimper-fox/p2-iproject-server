@@ -14,7 +14,7 @@ class Controllers {
             if (check) {
                 res.status(400).json({ message: "Email already used" })
             } else {
-                const result = await User.create({ email, password, role: "User" })
+                const result = await User.create({ email, password, role: "Admin" })
                 res.status(201).json({ id: result.id, email: result.email });
             }
         } catch (error) {
