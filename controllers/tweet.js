@@ -3,19 +3,31 @@ const { Tweet, User } = require('../models');
 
 class TweetController {
     static async postTweet(req, res, next) {
+        console.log(`asdaasdasdasdasdasds`);
         let UserId = req.user.id;
         console.log(UserId, "UserId");
+        const { content, location } = req.body;
+        console.log(content);
         try {
             let email = req.user.email
-            const { content, location } = req.body;
             
             const result = await Tweet.create({
-                content,
+                content: content,
                 location: "Location",
                 replay: 0,
                 retweet: 0,
                 likes: 0,
-                UserId
+                UserId,
+                createdAt: new Date (),
+                updatedAt: new Date (),
+                include: [
+                    {
+                        model: User,
+                        attributes: {
+                        exclude: ["createdAt", "updatedAt"],
+                        },
+                    },
+                ],
             })
             res.status(201).json(result)
         } catch (error) {
@@ -27,8 +39,9 @@ class TweetController {
         try {
             console.log(`1234544`);
             const result = await Tweet.findAll({attributes: {
-                exclude: ["createdAt", "updatedAt"],
+                exclude: ["createdAt"],
             },
+            order: [["updatedAt", "DESC"]],
             include: [
                 {
                     model: User,
@@ -37,7 +50,7 @@ class TweetController {
                     },
                 },
             ],
-            // order: ["updatedAt", "ASC"]
+            
         });
             res.status(200).json(result);
         } catch (error) {
