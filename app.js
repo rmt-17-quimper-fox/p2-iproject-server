@@ -1,8 +1,11 @@
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv').config()
+}
 const express = require('express')
 const Controllers = require('./controllers/controller')
 const ControllerApi = require('./api/controllerApi')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const cors = require("cors")
 const authentication = require('./middleware/authentication')
 const {authorization, auth_getdata} = require('./middleware/authorization')
