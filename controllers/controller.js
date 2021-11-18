@@ -27,7 +27,7 @@ class Controller {
             res.status(201).json({
                 message: `Success registered ${response.email}`
             })
-            
+
             let transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
@@ -233,7 +233,7 @@ class Controller {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "https://zero-waste-iproject.web.app/success",
+                "return_url": "https://zeroapp-iproject.web.app/success",
                 "cancel_url": "http://localhost:8080/cancel"
             },
             "transactions": [{
@@ -270,7 +270,6 @@ class Controller {
     static paymentSuccess(req, res, next) {
         const payerId = req.query.PayerID
         const paymentId = req.query.paymentId
-
         const executePayment = {
             "payer_id": payerId,
             "transactions": [{
