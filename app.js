@@ -16,23 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 app.post("/register", Controller.register);
 app.post("/login", Controller.login);
 
-app.get("/covid-in-indonesia", async (req, res, next) => {
-  axios({
-    method: "GET",
-    url: "https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi",
-  })
-    .then(({ data }) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(err);
-    });
-});
+app.get("/status-covid", Controller.getCovidInformation);
 
 app.use(Authenticate);
 app.get("/task", Controller.getTasks);
-app.post("/task");
+app.post("/task", Controller.postTask);
 app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

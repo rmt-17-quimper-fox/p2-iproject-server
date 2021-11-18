@@ -1,3 +1,4 @@
+const axios = require("axios");
 const { checkPassword } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 const { User, Task } = require("../models");
@@ -46,6 +47,28 @@ class Controller {
       const newTask = { UserId: id, name, location, date, description };
       await Task.create(newTask);
       res.status(201).json({ message: "Task successfully created!" });
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async getCovidInformation(req, res, next) {
+    try {
+      const { name } = req.query;
+      let url = "https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi";
+      if (name) {
+        url += `?name=${name}`;
+      }
+      axios({
+        method: "GET",
+        url: url,
+      })
+        .then(({ data }) => {
+          res.status(200).json(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.send(err);
+        });
     } catch (err) {
       next(err);
     }
