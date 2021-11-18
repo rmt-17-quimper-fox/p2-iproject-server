@@ -6,7 +6,7 @@ const router = express.Router()
 const routerTweet = require('./tweet');
 const routerRetweet = require('./retweets.js');
 const routerReplayTweet = require('./replyTweet.js');
-
+const routerQuote = require('./quotes');
 
 
 
@@ -15,6 +15,7 @@ router.post('/login', Authentication.login)
 router.get('/checkToken', Authentication.checkToken)
 router.use(Authenticate)
 
+router.use('/quotes', routerQuote)
 router.use('/tweets', routerTweet)
 router.use('/retweets', routerRetweet)
 router.use('/replaytweets', routerReplayTweet)
