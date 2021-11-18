@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = proccess.env.PORT || 3000
+const port = process.env.PORT || 3000
 const cors = require("cors")
 const Controller = require('./controllers/controller')
 const authentication = require('./middlewares/authentication')

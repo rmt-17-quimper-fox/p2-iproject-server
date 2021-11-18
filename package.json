@@ -1,6 +1,9 @@
 {
   "name": "p2-iproject-server",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.17.4"
+  },
   "description": "Individual Project - Server",
   "main": "index.js",
   "scripts": {
