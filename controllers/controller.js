@@ -27,6 +27,30 @@ class Controller {
             res.status(201).json({
                 message: `Success registered ${response.email}`
             })
+            
+            let transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    user: 'zero.app.testing1@gmail.com',
+                    pass: 'iprojectpusing'
+                },
+                pool: true
+            })
+            
+            let mailOptions = {
+                from: 'zero.app.testing1@gmail.com',
+                to: response.email,
+                subject: 'Welcome to ZERO!',
+                text: 'This is a welcome message'
+            }
+            
+            transporter.sendMail(mailOptions, (err) => {
+                if(err){
+                    console.log(err)
+                } else{
+                    console.log(`email sent to ${response.email}`)
+                }
+            })
         } 
         catch (err) {
             next(err)
@@ -104,7 +128,7 @@ class Controller {
                 })
                 
                 let mailOptions = {
-                    from: 'jokowowbanget123@gmail.com',
+                    from: 'zero.app.testing1@gmail.com',
                     to: response.email,
                     subject: 'Welcome to ZERO!',
                     text: 'This is a welcome message'
@@ -209,7 +233,7 @@ class Controller {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:8083/success",
+                "return_url": "https://zero-waste-iproject.web.app/success",
                 "cancel_url": "http://localhost:8080/cancel"
             },
             "transactions": [{
