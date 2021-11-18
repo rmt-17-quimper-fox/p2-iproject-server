@@ -73,9 +73,9 @@ const forgotPassword = async (req, res, next) => {
         userFound.token = token;
         userFound.save();
         const subject = 'Reset Password';
-        const text = `This is your reset token ${token}`;
+        const text = `please go to http://localhost:8080/resetpassword/${token}`;
         sendEmail(email, subject, text);
-        res.status(200).json({ message: 'Please check your email to get reset token' });
+        res.status(200).json({ message: 'Please check your email to get new password' });
     } catch (error) {
         next(error)
     }

@@ -3,7 +3,6 @@ const { User } = require('../models');
 const getAllUsers = async (req, res, next) => {
     try {
         let resp = await User.findAll({ order: [['star', 'DESC']] });
-        console.log(resp);
         resp = resp.map(el => {
             return {
                 id: el.id,

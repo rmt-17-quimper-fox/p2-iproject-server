@@ -10,7 +10,7 @@ const { register, login, forgotPassword, resetPassword } = require('../controlle
 
 router.post('/register', register);
 router.post('/login', login)
-router.patch('/forgotpassword', forgotPassword)
+router.post('/forgotpassword', forgotPassword)
 router.patch('/resetpassword', resetPassword)
 router.use(authentication);
 router.use(thirdPartyRouter);
