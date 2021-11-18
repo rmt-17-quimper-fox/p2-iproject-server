@@ -17,11 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: { msg: `Name cannot be empty` },
-          notEmpty: { msg: `Name cannot be empty` },
-        },
       },
       email: {
         type: DataTypes.STRING,
@@ -48,10 +43,8 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "User",
       hooks: {
-        beforeCreate: {
-          beforeCreate: (user, option) => {
-            user.password = passwordHash(user.password);
-          },
+        beforeCreate: (user, option) => {
+          user.password = passwordHash(user.password);
         },
       },
     }

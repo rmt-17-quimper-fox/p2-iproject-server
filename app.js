@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const axios = require("axios");
 const cors = require("cors");
 const express = require("express");
 const Controller = require("./controllers/controller");
@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // app.use(router);
-app.post("/login", Controller.login);
 app.post("/register", Controller.register);
+app.post("/login", Controller.login);
 
 app.get("/covid-in-indonesia", async (req, res, next) => {
   axios({

@@ -23,9 +23,9 @@ class Controller {
   }
   static async register(req, res, next) {
     try {
-      const { name, email, password } = req.body;
+      let { name, email, password } = req.body;
       let newUser = await User.create({ name: name, email: email, password: password });
-      res.status(201).json(newUser);
+      res.status(201).json({ name: newUser.name, email: newUser.email });
     } catch (err) {
       next(err);
     }
