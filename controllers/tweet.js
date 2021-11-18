@@ -42,6 +42,7 @@ class TweetController {
                 exclude: ["createdAt"],
                 order: ["id", "ASC"]
             },
+            order: [["updatedAt", "DESC"]],
             include: [
                 {
                     model: User,
