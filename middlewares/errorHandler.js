@@ -10,10 +10,6 @@ const errorHandler = ({ name, errors }, req, res, next) => {
             status = 400;
             message = 'Email must be unique';
             break;
-        case 'INVALID_PARAM_ERROR':
-            status = 400;
-            message = errors;
-            break;
         case 'Email is empty':
             status = 400;
             message = 'Email is required';
