@@ -1,7 +1,8 @@
 if (process.env.NODE_ENV !== "production") {
   require('dotenv').config()
 }
-const cors = require('cors')
+// const cors = require('cors')
+import cors from 'cors'
 const express = require('express')
 const Controllers = require('./controllers/controller')
 const ControllerApi = require('./api/controllerApi')
