@@ -8,6 +8,14 @@ const fruitsImageUrl = {
     Orange: "https://image.freepik.com/free-vector/hand-drawn-colorful-orange-illustration_53876-2977.jpg"
 }
 
+const answer = {
+    Apple: { answer1: 'Apple', answer2: 'Banana', answer3: 'Orange', answer4: 'Lemon' },
+    Banana: { answer1: 'Lemon', answer2: 'Banana', answer3: 'Apple', answer4: 'Mango' },
+    Lemon: { answer1: 'Apple', answer2: 'Lemon', answer3: 'Orange', answer4: 'Mango' },
+    Mango: { answer1: 'Lemon', answer2: 'Apple', answer3: 'Mango', answer4: 'Orange' },
+    Orange: { answer1: 'Orange', answer2: 'Mango', answer3: 'Banana', answer4: 'Apple' },
+}
+
 async function getFruits() {
     const findFruit = ['Apple', 'Banana', 'Lemon', 'Mango', 'Orange']
     const imageUrl = fruitsImageUrl
@@ -34,4 +42,31 @@ async function getFruits() {
     return result
 }
 
-module.exports = { getFruits }
+async function fruitQuiz() {
+    const findFruit = ['Apple', 'Banana', 'Lemon', 'Mango', 'Orange']
+    const imageUrl = fruitsImageUrl
+    let result = []
+    let id = 0
+    const response = await axios({
+        methods: "GET",
+        url: `https://www.fruityvice.com/api/fruit/all`
+    })
+    for (const key of response.data) {
+        for (const iterator of findFruit) {
+            let temp = {}
+            if (key.name === iterator) {
+                key.imageUrl = imageUrl[iterator]
+                key.answer = answer[iterator]
+                id++
+                temp.id = id
+                temp.name = key.name
+                temp.imageUrl = key.imageUrl
+                temp.answer = key.answer
+                result.push(temp)
+            }
+        }
+    }
+    return result
+}
+
+module.exports = { getFruits, fruitQuiz }

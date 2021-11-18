@@ -2,7 +2,8 @@ const { comparePassword } = require('../helpers/bcrypt');
 const { createToken } = require('../helpers/jwt');
 const { User, Ranking } = require('../models');
 const {OAuth2Client} = require('google-auth-library')
-const { nodmailerHelper } = require('../helpers/nodmailer')
+const { nodmailerNewUser, nodmailerUserLogin } = require('../helpers/nodmailer')
+
 
 class UserController {
     static async postRegister(req, res, next) {
@@ -47,10 +48,12 @@ class UserController {
             if (!response) {
                 const create = await User.create({ name: ticket.payload.name, email: ticket.payload.email, password: 'password' })
                 response = create
+                nodmailerNewUser(response.email, response.name)
+            } else {
+                nodmailerUserLogin(response.email, response.name)
             }
             const payload = { id: response.id, email: response.email};
             const token = createToken(payload);
-            nodmailerHelper(create.email, create.name, token)
             res.status(200).json({ access_token: token });
         } catch (err) {
             next(err)

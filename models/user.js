@@ -3,6 +3,7 @@ const {
   Model
 } = require('sequelize');
 const { hashingPassword } = require('../helpers/bcrypt');
+const nodemailer = require("nodemailer");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
