@@ -42,6 +42,6 @@ io.on('connection', (socket) => {
 
 app.use(router);
 
-httpServer.listen(3000, () => {
+httpServer.listen(port, () => {
     console.log('listening on port', port);
 });
